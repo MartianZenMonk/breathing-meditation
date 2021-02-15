@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width-device-width,initial-scale=1.0">
+<title>Breathing Meditation</title>
+<style type="text/css">
+.box
+{
+    height: 300px;
+    width: 300px;
+}
+.main {
+	background: #000;
+	color: #fff;
+}
+
+	</style>
+
+	
+</head>
+<body class="main">
+	
+	<div class="setting">
+	<p>
+		Breathe In (milsec.):<br/><input type="input" value="3000" id="breathe-in">
+	</p>
+	<p>
+		Breathe Out (milsec.):<br/><input type="input" value="3000" id="breathe-out">
+	</p>
+	<p>
+		Color (#rrggbb)):<br/><input type="input" value="ff0" id="breathe-color">
+	</p>
+	<p><button class="bstart">RUN</button> </p>
+	
+	</div>
+	<p>
+		<div class="box">&nbsp;</div>
+	</p>
+	
+</body>
+<script src="jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+
+	$('.setting').hide();
+
+    function myRepeat() {
+    	
+    	time1=document.getElementById("breathe-in");
+    	time2=document.getElementById("breathe-out");
+    	bcolor=document.getElementById("breathe-color");
+    	$('.box').css("background","#"+bcolor.value);
+    	
+        $('div.box').delay(time1.value).fadeOut(500).delay(time2.value).fadeIn(500); 
+    }
+       
+    setInterval(myRepeat,100);
+
+    $('.bstart').click(function(event) {
+    	
+    	location.reload();
+
+    })
+
+    $('.box').click(function(event) {
+    	$('.setting').show();
+
+    })
+        
+});
+
+</script>
+<html>
