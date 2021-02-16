@@ -33,7 +33,7 @@ html,body {
 	<p>
 		Color (#rrggbb)):<br/><input type="input" value="ff0" id="breathe-color">
 	</p>
-	<p><button class="bstart">RUN</button> </p>
+	<p><button class="bstart">PLAY</button> </p>
 	
 	</div>
 	<p>
@@ -43,30 +43,50 @@ html,body {
 </body>
 <script src="jquery.min.js"></script>
 <script type="text/javascript">
+
 $(function() {
 
-	$('.setting').hide();
+	var myVar,i=0;
+	time1=document.getElementById("breathe-in"); 
+    time2=document.getElementById("breathe-out"); 
+    bcolor=document.getElementById("breathe-color");
+
+	
+	//$('.setting').hide();
 
     function myRepeat() {
     	
-    	time1=document.getElementById("breathe-in");
-    	time2=document.getElementById("breathe-out");
+    	time1=document.getElementById("breathe-in"); 
+    	time2=document.getElementById("breathe-out"); 
     	bcolor=document.getElementById("breathe-color");
+
     	$('.box').css("background","#"+bcolor.value);
     	
         $('div.box').delay(time1.value).fadeOut(500).delay(time2.value).fadeIn(500); 
+       // console.log(i++);
     }
-       
-    setInterval(myRepeat,100);
 
-    $('.bstart').click(function(event) {
-    	
-    	location.reload();
+    function clearmyRepeat() {
+    	console.log(myVar);	
+    	clearInterval(myVar);
+    }
+         
+    //myVar = setInterval(myRepeat,100);
+        
+    $('.bstart').on('click',function() {
+
+    	playtime= parseInt(time1.value)+parseInt(time2.value)+1000;
+	
+    	$('.setting').hide();
+    	myVar = setInterval(myRepeat,playtime);  
+    	console.log(myVar,playtime); 
+    	//location.reload();	
 
     })
 
     $('.box').click(function(event) {
     	$('.setting').show();
+    	clearmyRepeat();
 
     })
         
