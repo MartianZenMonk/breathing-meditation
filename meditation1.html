@@ -25,13 +25,19 @@ html,body {
 	
 	<div class="setting">
 	<p>
-		Breathe In (milsec.):<br/><input type="input" value="3000" id="breathe-in">
+		Breathe In (milsec.):<br/><input type="input" value="1000" id="breathe-in">
 	</p>
 	<p>
 		Breathe Out (milsec.):<br/><input type="input" value="3000" id="breathe-out">
 	</p>
 	<p>
-		Color (#rrggbb)):<br/><input type="input" value="ff0" id="breathe-color">
+		RED :<br/><input type="range" min=0 max=255 value="255" id="redcolor">
+	</p>
+	<p>
+		GREEN :<br/><input type="range" min=0 max=255 value="255" id="greencolor">
+	</p>
+	<p>
+		BLUE :<br/><input type="range" min=0 max=255 value="0" id="bluecolor">
 	</p>
 	<p><button class="bstart">PLAY</button> </p>
 	
@@ -46,21 +52,35 @@ html,body {
 
 $(function() {
 
-	var myVar,i=0;
+	var myVar,mcolor;
 	time1=document.getElementById("breathe-in"); 
     time2=document.getElementById("breathe-out"); 
-    bcolor=document.getElementById("breathe-color");
+    rcolor=document.getElementById("redcolor");
+    gcolor=document.getElementById("greencolor");
+    bcolor=document.getElementById("bluecolor");
+    mcolor= d2h(rcolor.value)+d2h(gcolor.value)+d2h(bcolor.value);
 
+    $('.box').css("background","#"+mcolor);
+
+	function d2h(d,padding) {
+		var hex= Number(d).toString(16);
+		padding = typeof (padding) === "undefined" || padding === null ? padding =2 : padding;
+		while (hex.length<padding) {
+			hex = "0" + hex;
+		}
+		return hex;
+	}
 	
-	//$('.setting').hide();
-
     function myRepeat() {
     	
     	time1=document.getElementById("breathe-in"); 
     	time2=document.getElementById("breathe-out"); 
-    	bcolor=document.getElementById("breathe-color");
+    	rcolor=document.getElementById("redcolor");
+    	gcolor=document.getElementById("greencolor");
+    	bcolor=document.getElementById("bluecolor");
+    	mcolor= d2h(rcolor.value)+d2h(gcolor.value)+d2h(bcolor.value);
 
-    	$('.box').css("background","#"+bcolor.value);
+    	$('.box').css("background","#"+mcolor);
     	
         $('div.box').delay(time1.value).fadeOut(500).delay(time2.value).fadeIn(500); 
        // console.log(i++);
